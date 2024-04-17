@@ -1,6 +1,7 @@
 package com.eliassand.workshopmongo.services;
 
 import com.eliassand.workshopmongo.domain.User;
+import com.eliassand.workshopmongo.dto.UserDTO;
 import com.eliassand.workshopmongo.repository.UserRepository;
 import com.eliassand.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,13 @@ public class UserService {
     public User findById(String id) {
         User user = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
         return user;
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
